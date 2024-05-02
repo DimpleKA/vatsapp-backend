@@ -24,8 +24,7 @@ router.post('/', async (req, res) => {
     // Check if the email has an existing OTP
     let otp = '';
     const existingOtp = await Otp.findOne({ email });
-    if (existingOtp) {
-      otp = generateOTP();
+  
       // Update existing OTP
       otp = generateOTP();
       const filter = { email: email };
@@ -36,7 +35,7 @@ router.post('/', async (req, res) => {
 
       const message = "The OTP to register your email with us is ";
       sendOTP(email, otp, message);
-    } 
+    
 
     res.status(201).json({ message: 'OTP sent successfully', displayFullForm:true });
   } catch (error) {
